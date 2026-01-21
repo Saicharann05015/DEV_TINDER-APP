@@ -10,4 +10,4 @@ app.use("/hii",(req,res)=>{
 app.listen(3000,()=>{
     console.log("server is running on the port number 3000")
 
-})
+});
