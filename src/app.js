@@ -2,20 +2,31 @@ const express = require("express");
 const app = express();
 
 
+//double routes handler 
+
+app.use("/welcome",(req,res,next)=>{
+    next()
+    res.send("hello this is the from welcome")
+    // next()
+},(req,res,next)=>{
+    next()
+    res.send("hello this is 2nd")
+    //  next()
+},(req,res)=>{
+    res.send("hello this is 3nd")
+})
+
 
 // params 
-
 app.get("/product/:id/review/:rid",(req,res)=>{
     let {id,rid} = (req.params)
     res.send(`hello this product so & so ${id} ${rid}` )
-
 })
-
+    
 app.get("/value",(req,res)=>{
   console.log(req.query);
   res.send("hello this is query params")
 })
-
 
 app.get("/product/:id",(req,res)=>{
     let {id} = req.params;
@@ -23,15 +34,6 @@ app.get("/product/:id",(req,res)=>{
     res.send(`this is the params ${id}, this is the query ${en,val}`);
 
 })
-
-
-
-
-
-
-
-
-
 
 // app.get("/log-in",(req,res)=>{
 //     res.send("login Page")
