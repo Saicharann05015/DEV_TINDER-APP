@@ -1,39 +1,56 @@
 const express = require("express");
 const app = express();
 
+const auth = require("./middlewares/auth")
+
+let Data = [];
+
+// routes  & routeHandler
+
+app.post("/addUser", auth, (req,res)=>{
+    let user = req.body;
+    Data.push(user)
+    res.send("user sucessfully created");
+})
+
+app.get('/getData',(req,res)=>{
+    res.send("fetched data ");
+
+})
+
 
 //double routes handler 
 
-app.use("/welcome",(req,res,next)=>{
-    next()
-    res.send("hello this is the from welcome")
-    // next()
-},(req,res,next)=>{
-    next()
-    res.send("hello this is 2nd")
-    //  next()
-},(req,res)=>{
-    res.send("hello this is 3nd")
-})
+// app.use("/welcome",(req,res,next)=>{
+//     next()
+//     res.send("hello this is the from welcome")
+//     // next()
+// },(req,res,next)=>{
+//     next()
+//     res.send("hello this is 2nd")
+//     //  next()
+// },(req,res)=>{
+//     res.send("hello this is 3nd")
+// })
 
 
 // params 
-app.get("/product/:id/review/:rid",(req,res)=>{
-    let {id,rid} = (req.params)
-    res.send(`hello this product so & so ${id} ${rid}` )
-})
+// app.get("/product/:id/review/:rid",(req,res)=>{
+//     let {id,rid} = (req.params)
+//     res.send(`hello this product so & so ${id} ${rid}` )
+// })
     
-app.get("/value",(req,res)=>{
-  console.log(req.query);
-  res.send("hello this is query params")
-})
+// app.get("/value",(req,res)=>{
+//   console.log(req.query);
+//   res.send("hello this is query params")
+// })
 
-app.get("/product/:id",(req,res)=>{
-    let {id} = req.params;
-    let {en,val} = req.query;
-    res.send(`this is the params ${id}, this is the query ${en,val}`);
+// app.get("/product/:id",(req,res)=>{
+//     let {id} = req.params;
+//     let {en,val} = req.query;
+//     res.send(`this is the params ${id}, this is the query ${en,val}`);
 
-})
+// })
 
 // app.get("/log-in",(req,res)=>{
 //     res.send("login Page")
@@ -44,15 +61,15 @@ app.get("/product/:id",(req,res)=>{
 //     res.send({name:"saicharan",class:"B.Tech"})
 // })
 
-app.post("/Post",(req,res)=>{
-    res.send("hello user your data put in the database");
+// app.post("/Post",(req,res)=>{
+//     res.send("hello user your data put in the database");
 
-})
+// })
 
-app.delete("/Delete",(req,res)=>{
-    res.send("hello user your sucessfully deleted")
+// app.delete("/Delete",(req,res)=>{
+//     res.send("hello user your sucessfully deleted")
 
-})
+// })
 
 app.listen(3000,()=>{
     console.log("server is running on the port number 3000")
